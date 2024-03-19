@@ -11,7 +11,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
 
     def __str__(self):
-        print("[<class name>] (<self.id>) <self.__dict__>")
+        return("[Rectangle] ({}) {}.format(self.id, self.__dict__")
     
     def save(self):
         pass
