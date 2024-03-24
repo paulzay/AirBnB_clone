@@ -20,9 +20,9 @@ class HBNBCommand(cmd.Cmd):
         """ END OF FILE """
         return True
 
-    def do_emptyline(self):
+    def emptyline(self):
         """ Dont execute anything """
-        return ""
+        pass
 
     def do_create(self, args):
         """
