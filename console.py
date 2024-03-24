@@ -11,6 +11,8 @@ class HBNBCommand(cmd.Cmd):
     """ cmd class """
     prompt = '(hbnb) '
     file = None
+    classes = ["User", "BaseModel", "State",
+                "Place", "Review", "Amenity", "City"]
 
     def do_quit(self, arg):
         """ Quit command to exit the program """
@@ -32,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         args = args.split()
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             new_model = BaseModel()
@@ -48,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -71,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -93,21 +95,27 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all
         instances based or not on the class name.
         """
+        data_list = []
         if not args:
-            print('allat')
+            for item in models.storage.all().values():
+                data_list.append(item.__str__())
+                print(data_list)
         else:
             args = args.split()
-            if args[0] != 'BaseModel':
+            if args[0] not in self.classes:
                 print("** class doesn't exist **")
             else:
-                pass
+                for item in models.storage.all().values():
+                    if args[0] == item.__class__.__name__:
+                        data_list.append(item.__str__())
+                print(data_list)
 
     def do_update(self, args):
         """
         Updates an instance based on the class name and
         id by adding or updating attribute
         """
-        passhwl
+        pass
 
 
 if __name__ == '__main__':
