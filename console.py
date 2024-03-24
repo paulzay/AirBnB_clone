@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
+""" class definition """
 import json
 import cmd
 from models.base_model import BaseModel
 import models
-""" class definition """
 
 
 class HBNBCommand(cmd.Cmd):
+    """ cmd class"""
     intro = 'Welcome to my shell! Type help or ? to list commands.\n'
     prompt = '(hbnb) '
     file = None
