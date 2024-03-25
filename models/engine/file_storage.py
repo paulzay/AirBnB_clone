@@ -3,6 +3,12 @@
 """class definition"""
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
+from models.city import City
+from models.place import Place
 
 
 class FileStorage:
@@ -27,8 +33,18 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as file:
                 obj_dict = json.load(file)
-                self.__objects = {
-                    key: BaseModel(**value) for key, value in obj_dict.items()
-                }
+                classes = {
+                    "BaseModel": BaseModel,
+                    "User": User,
+                    "Amenity": Amenity,
+                    "State": State,
+                    "Review": Review,
+                    "City": City,
+                    "Place": Place
+                    }
+
+                for key, obj_dict in obj_dict.items():
+                    class_name = obj_dict["__class__"]
+                    self.__objects[key] = classes[class_name](**obj_dict)
         except FileNotFoundError:
-            pass
+            return
