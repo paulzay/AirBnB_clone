@@ -17,8 +17,16 @@ class HBNBCommand(cmd.Cmd):
     """ cmd class """
     prompt = '(hbnb) '
     file = None
-    classes = ["User", "BaseModel", "State", "Place",
-               "Review", "Amenity", "City"]
+
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Amenity": Amenity,
+        "City": City,
+        "State": State,
+        "Review": Review,
+        "Place": Place
+    }
 
     def do_quit(self, arg):
         """ Quit command to exit the program """
@@ -43,34 +51,13 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
-            if args[0] == "BaseModel":
-                new_model = BaseModel()
+            try:
+                new_model = self.classes[args[0]]()
                 new_model.save()
                 print(new_model.id)
-            elif args[0] == "User":
-                new_model = User()
-                new_model.save()
-                print(new_model.id)
-            elif args[0] == "Amenity":
-                new_model = Amenity()
-                new_model.save()
-                print(new_model.id)
-            elif args[0] == "City":
-                new_model = City()
-                new_model.save()
-                print(new_model.id)
-            elif args[0] == "State":
-                new_model = State()
-                new_model.save()
-                print(new_model.id)
-            elif args[0] == "Review":
-                new_model = Review()
-                new_model.save()
-                print(new_model.id)
-            elif args[0] == "Place":
-                new_model = BaseModel()
-                new_model.save()
-                print(new_model.id)
+            except Exception as e:
+                print("** Error creating instance **")
+                print(e)
 
     def do_show(self, args):
         """
