@@ -4,7 +4,7 @@
 import unittest
 
 
-class ReviewTest(unittest.TestCase):
+class TestReview(unittest.TestCase):
     def test_something(self):
         pass
 

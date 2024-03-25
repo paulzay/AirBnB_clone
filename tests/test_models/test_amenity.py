@@ -4,7 +4,7 @@
 import unittest
 
 
-class AmenityTest(unittest.TestCase):
+class TestAmenity(unittest.TestCase):
 	def test_name(self):
 		pass
 

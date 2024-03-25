@@ -4,7 +4,7 @@
 import unittest
 
 
-class StateTest(unittest.TestCase):
+class TestState(unittest.TestCase):
     def test_name(self):
         pass
 

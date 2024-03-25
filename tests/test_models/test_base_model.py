@@ -1,36 +1,49 @@
-#!/usr/bin/python3
-
-""" test class definition """
 import unittest
+from datetime import datetime
+from unittest.mock import patch
 from models.base_model import BaseModel
-import models
+import uuid
 
+class TestBaseModel(unittest.TestCase):
+    def setUp(self):
+        self.base_model = BaseModel()
 
-class BaseModelTest(unittest.TestCase):
-    """docstring for class"""
-    def test_save(self):
-        old_len = len(models.storage.all())
-        mid_len = len(models.storage.all())
-        new_model = BaseModel()
-        new_model.name = "Root User"
-        new_model.my_num = 12
-        new_model.save()
-        self.assertEqual(old_len, mid_len)
+    def tearDown(self):
+        pass
+
+    def test_init(self):
+        self.assertIsInstance(self.base_model.id, str)
+        self.assertIsInstance(self.base_model.created_at, datetime)
+        self.assertIsInstance(self.base_model.updated_at, datetime)
+
+    def test_str(self):
+        expected_str = f"[BaseModel] ({self.base_model.id}) {self.base_model.__dict__}"
+        self.assertEqual(str(self.base_model), expected_str)
+
+    @patch('models.base_model.datetime')
+    def test_save(self, mock_datetime):
+        mock_datetime.now.return_value = datetime(2023, 5, 16, 14, 27, 12, 456789)
+        self.base_model.save()
+        self.assertEqual(self.base_model.updated_at, mock_datetime.now.return_value)
 
     def test_to_dict(self):
-        """ test to_dict """
-        pass
+        base_model_dict = self.base_model.to_dict()
+        self.assertIsInstance(base_model_dict, dict)
+        self.assertEqual(base_model_dict['__class__'], 'BaseModel')
+        self.assertEqual(base_model_dict['id'], self.base_model.id)
+        self.assertEqual(base_model_dict['created_at'], self.base_model.created_at.isoformat())
+        self.assertEqual(base_model_dict['updated_at'], self.base_model.updated_at.isoformat())
 
-    def test__str__(self):
-        """ test __str__ """
-        pass
-
-    def test_created_at(self):
-        pass
-
-    def test_id(self):
-        pass
-
+    def test_kwargs(self):
+        kwargs = {
+            'id': 'test_id',
+            'created_at': '2023-05-16T14:27:12.456789',
+            'updated_at': '2023-05-16T14:27:12.456789'
+        }
+        base_model_kwargs = BaseModel(**kwargs)
+        self.assertEqual(base_model_kwargs.id, 'test_id')
+        self.assertEqual(base_model_kwargs.created_at, datetime(2023, 5, 16, 14, 27, 12, 456789))
+        self.assertEqual(base_model_kwargs.updated_at, datetime(2023, 5, 16, 14, 27, 12, 456789))
 
 if __name__ == '__main__':
     unittest.main()

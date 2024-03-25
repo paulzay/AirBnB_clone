@@ -4,7 +4,7 @@
 import unittest
 
 
-class CityTest(unittest.TestCase):
+class TestCity(unittest.TestCase):
     def test_something(self):
         pass
 
