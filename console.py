@@ -11,8 +11,8 @@ class HBNBCommand(cmd.Cmd):
     """ cmd class """
     prompt = '(hbnb) '
     file = None
-    classes = ["User", "BaseModel", "State",
-                "Place", "Review", "Amenity", "City"]
+    classes = ["User", "BaseModel", "State", "Place",
+               "Review", "Amenity", "City"]
 
     def do_quit(self, arg):
         """ Quit command to exit the program """
@@ -115,7 +115,31 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and
         id by adding or updating attribute
         """
-        pass
+        args = args.split()
+
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif len(args) < 3:
+            print("** attribute name missing ** ")
+        elif len(args) < 4:
+            print("** value missing **")
+        elif len(args) > 5:
+            return
+        else:
+            class_name = args[0]
+            instance_id = args[1]
+            key = f"{class_name}.{instance_id}"
+            instance = models.storage.all().get(key)
+
+            if not instance:
+                print("** no instance found **")
+            else:
+                pass
+                data = models.storage.all()
 
 
 if __name__ == '__main__':
