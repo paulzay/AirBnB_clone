@@ -25,6 +25,12 @@ class BaseModelTest(unittest.TestCase):
         """ test __str__ """
         pass
 
+    def test_created_at(self):
+        pass
+
+    def test_id(self):
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()
