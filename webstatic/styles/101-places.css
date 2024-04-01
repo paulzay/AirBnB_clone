@@ -1,0 +1,58 @@
+.information {
+  height: 80px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.max_guest,.number_rooms, .number_bathrooms {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.max_guest::before {
+  content: url('/images/icon_group.png');
+}
+
+.number_rooms::before {
+  content: url('/images/icon_bed.png');
+}
+
+.number_bathrooms::before {
+  content: url('/images/icon_bath.png');
+}
+.user,.description {
+  padding-top: 10px;
+}
+.amenities {
+  margin-top: 40px;
+  width: 100%;
+}
+.reviews {
+  margin-top: 40px;
+}
+.amenities > h2, .reviews > h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: start;
+}
+.amenities > ul, .reviews > ul {
+  margin: 0;
+  padding: 0;
+}
+.amenities > ul li {
+  display: flex;
+  align-items: center;
+}
+.amenities > ul li:nth-child(1)::before{
+
+  content: url('/images/icon_tv.png');
+}
+.amenities > ul li:nth-child(2)::before{
+  content: url('/images/icon_wifi.png');
+}
+.amenities > ul li:nth-child(3)::before{
+  content: url('/images/icon_pets.png');
+}
