@@ -3,7 +3,8 @@ header {
   height: 70px;
   width: 100%;
   border-bottom: 1px solid #ccc;
-  /* background-image: url('/images/logo.png') no-repeat;
-  background-size: auto;
-  background-position: center; */
+}
+header::before {
+  content: url('/images/logo.png');
+  padding-left: 20px;
 }
