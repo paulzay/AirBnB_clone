@@ -27,16 +27,16 @@
   padding-top: 10px;
 }
 .amenities {
-  margin-top: 40px;
   width: 100%;
 }
 .reviews {
-  margin-top: 40px;
+width: 100%;
 }
 .amenities > h2, .reviews > h2 {
   font-size: 16px;
   border-bottom: 1px solid #ddd;
   text-align: start;
+  margin-top: 40px;
 }
 .amenities > ul, .reviews > ul {
   margin: 0;
